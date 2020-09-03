@@ -9,29 +9,28 @@ export default function App() {
   const [lights, setLights] = useState([]);
 
   let getLights = () => {
-    Axios.get(url).then(res => {
-      let hueLights = Object.keys(res.data.lights)
+    Axios.get(url + "/lights").then(res => {
+      let hueLights = Object.keys(res.data)
       setLights(hueLights)
     })
   }
 
   let turnOn = (lightNum) => {
-    console.log(lightNum)
-    // Axios.put(url + "/lights/" + lightNum + "/state", {"on": true})
+    Axios.put(url + `/lights/${lightNum}/state`, {"on": true})
   }
 
   let turnOff = (lightNum) => {
-    Axios.put(url + "/lights/" + lightNum + "/state", {"on": false})
+    Axios.put(url + `/lights/${lightNum}/state`, {"on": false})
   }
 
   let content = '';
   if (lights.length > 0) {
     console.log(lights)
-    content = lights.map((light, id) => <div key={id}><h1>{light}</h1><button onClick={(light) => turnOn(light)}>On</button><button onClick={(light) => turnOff(light)}>Off</button></div>)
+    content = lights.map((light, id) => <div key={id}><h1>{light}</h1><button onClick={() => turnOn(light)}>On</button><button onClick={() => turnOff(light)}>Off</button></div>)
   }
   return (
     <div className="App">
-      <h1>Hi</h1>
+      <h1>Hello World</h1>
       <button onClick={() => getLights()}>Get Lights</button>
       {content}
     </div>
