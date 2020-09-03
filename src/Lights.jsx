@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { ChromePicker } from 'react-color';
 import Axios from 'axios';
 
+// Notes: bri: 1-254, ct: 500(warmest)-153(coldest), hue: 0-65535
 
 export default function Lights(props) {
     const [lights, setLights] = useState([]);
@@ -27,6 +29,7 @@ export default function Lights(props) {
     return (
         <div className="App">
             <h1>Lights Page</h1>
+            <ChromePicker color="#fff" onChangeComplete={console.log("color.hex")} />
             {content}
         </div>
     )
