@@ -18,8 +18,8 @@ export function rgbToXY(r, g, b) { // Return Format: [0.2553, 0.9112]
     //Calculate XY values from XYZ
     let x = xx / (xx + yy + zz);
     let y = yy / (xx + yy + zz);
-    //Use the Y value as brightness
-    return {x, y, yy}
+    //Could now use the Y value as brightness yy: scale(y, 0, 1, 0, 255).toFixed(0)
+    return {x: Number.parseFloat(x).toFixed(4), y: Number.parseFloat(y).toFixed(4)}
 }
 
 export function xyToRGB(x, y, brightness) { // Return Format: {r: 255, g: 255, b: 255}
