@@ -9,7 +9,6 @@ const url = "http://192.168.1.138/api/f5y86pTphO238JSQkZSKMhXusS5l3kDsvoWhv9xw" 
 export default function App() {
   return (
     <div className="App">
-      <h1>Hello World</h1>
       <Lights url={url} />
       <Groups url={url} />
     </div>

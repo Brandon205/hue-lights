@@ -1,5 +1,28 @@
+body {
+  margin: 0;
+  background-color: whitesmoke;
+  height: 100vh;
+  width: 100vw;
+}
+
+h1 {
+  margin-top: 0;
+}
+
 .App {
   text-align: center;
+}
+
+.lights {
+  text-align: center;
+}
+
+.show {
+  z-index: 1;
+  margin: auto;
+  position: absolute;
+  top: 30%; left: 45%; bottom: 0; right: 0;
+
 }
 
 .no-show {
