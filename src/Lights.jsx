@@ -16,12 +16,12 @@ export default function Lights(props) {
         })
     }, [props.url])
   
-    let turnOn = (lightNum) => {
-      Axios.put(props.url + `/lights/${lightNum}/state`, {"on": true})
-    }
-  
-    let turnOff = (lightNum) => {
-      Axios.put(props.url + `/lights/${lightNum}/state`, {"on": false})
+    let toggleLight = (lightNum, on) => {
+      if (on) {
+        Axios.put(props.url + `/lights/${lightNum}/state`, {"on": true})
+      } else {
+        Axios.put(props.url + `/lights/${lightNum}/state`, {"on": false})
+      }
     }
 
     let colorToggle = (lightNum) => { // Show the color picker for the corresponding light
@@ -55,8 +55,8 @@ export default function Lights(props) {
       content = lights.map((light, id) => 
       <div key={id - 1}>
         <h2>{light[1].name}</h2>
-        <button onClick={() => turnOn(light[0])}>On</button>
-        <button onClick={() => turnOff(light[0])}>Off</button>
+        <button onClick={() => toggleLight(light[0], true)}>On</button>
+        <button onClick={() => toggleLight(light[0], false)}>Off</button>
         {light[1].type.toLowerCase().includes("color") ? <button onClick={() => colorToggle(light[0])}>Color</button> : ''}
       </div>);
     }
