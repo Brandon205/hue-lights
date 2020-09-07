@@ -52,7 +52,13 @@ export default function Lights(props) {
   
     let content = '';
     if (lights.length > 0) {
-      content = lights.map((light, id) => <div key={id - 1}><h2>{light[1].name}</h2><button onClick={() => turnOn(light[0])}>On</button><button onClick={() => turnOff(light[0])}>Off</button><button onClick={() => colorToggle(light[0])}>Color</button></div>);
+      content = lights.map((light, id) => 
+      <div key={id - 1}>
+        <h2>{light[1].name}</h2>
+        <button onClick={() => turnOn(light[0])}>On</button>
+        <button onClick={() => turnOff(light[0])}>Off</button>
+        {light[1].type.toLowerCase().includes("color") ? <button onClick={() => colorToggle(light[0])}>Color</button> : ''}
+      </div>);
     }
     return (
         <div className="lights">
