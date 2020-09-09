@@ -53,18 +53,29 @@ export default function Groups(props) {
     let content;
     if (groups.length > 0) {
         content = groups.map((group, id) => 
-        <div key={id}>
-            <h2>{group[1].name}</h2>
-            <button onClick={() => toggleLights(group[0], true)}>All On</button>
-            <button onClick={() => toggleLights(group[0], false)}>All Off</button>
-            <button onClick={() => colorToggle(group[0])}>Color</button>
-        </div>);
+            <div className="col s6 offset-s3 m6" key={id}>
+                <h2 className="header">{group[1].name}</h2>
+                <div className="card horizontal">
+                    <div className="card-stacked">
+                        <div className="card-content">
+                            <p>Lights are currently {group[1].state.any_on ? <span className="green-text text-darken-3">On</span> : <span className="red-text">Off</span>} </p>
+                            <p>Group Type: {group[1].type}</p>
+                        </div>
+                        <div className="card-action center">
+                            <button className="btn-floating teal" onClick={() => toggleLights(group[0], true)}>On</button>
+                            <button className="btn-floating red" onClick={() => toggleLights(group[0], false)}>Off</button>
+                            <button className="btn-floating pink" onClick={() => colorToggle(group[0])}>Color</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     } else {
         content = (<h2>No Groups made yet</h2>)
+        //TODO: Add a create form or something here
     }
     return (
-        <div className="App">
-            <h1>Your Groups</h1>
+        <div className="container">
             <div className={picker ? "show" : "no-show"} id="group-color-picker">
               <SketchPicker color={rgb} disableAlpha={true} onChangeComplete={(color) => updateColor(color.rgb)} />
             </div>
