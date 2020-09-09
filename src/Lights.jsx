@@ -52,23 +52,33 @@ export default function Lights(props) {
   
     let content = '';
     if (lights.length > 0) {
-      content = lights.map((light, id) => 
-      <div key={id - 1} className="light">
-        <h2>{light[1].name}</h2>
-        <button className="on-button" onClick={() => toggleLight(light[0], true)}>On</button>
-        <button className="off-button" onClick={() => toggleLight(light[0], false)}>Off</button>
-        {light[1].type.toLowerCase().includes("color") ? <button className="color-button" onClick={() => colorToggle(light[0])}>Color</button> : ''}
-      </div>);
+      content = lights.map((light, id) =>
+        <div className="col s6 offset-s3 m6" key={id}>
+          <h2 className="header">{light[1].name}</h2>
+          <div className="card horizontal">
+            <div className="card-stacked">
+              <div className="card-content">
+    <p>Currently: {light[1].state.on ? <span className="green-text text-darken-2">On</span> : <span className="red-text">Off</span>} </p>
+                <p>Product Name: {light[1].productname}</p>
+              </div>
+              <div className="card-action center">
+                <button className="btn-floating teal" onClick={() => toggleLight(light[0], true)}>On</button>
+                <button className="btn-floating red" onClick={() => toggleLight(light[0], false)}>Off</button>
+                {light[1].type.toLowerCase().includes("color") ? <button className="btn-floating pink" onClick={() => colorToggle(light[0])}>Color</button> : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
     }
     return (
-      <>
-        <h1>Your Lights</h1>
-        <div className="lights-container">
-            <div className={picker ? "show" : "no-show"} id="color-picker">
-              <SketchPicker color={rgb} disableAlpha={true} onChangeComplete={(color) => updateColor(color.rgb)} />
-            </div>
-            {content}
+      <div className="container">
+        <div className={picker ? "show" : "no-show"} id="color-picker">
+          <SketchPicker color={rgb} disableAlpha={true} onChangeComplete={(color) => updateColor(color.rgb)} />
         </div>
-      </>
+        <div className="container">
+          {content}
+        </div>
+      </div>
     )
 }
