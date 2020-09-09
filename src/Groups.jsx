@@ -4,6 +4,7 @@ import { rgbToXY, xyToRGB } from './colorConverter.js';
 import Axios from 'axios';
 
 export default function Groups(props) {
+    const [lightSwitch, setLightSwitch] = useState(false); // To refetch the API when the lights are toggled
     const [groups, setGroups] = useState([]);
     const [picker, setPicker] = useState(false); // Whether or not to display the Color Picker
     const [groupNum, setGroupNum] = useState(0);
@@ -14,13 +15,15 @@ export default function Groups(props) {
             let hueGroups = Object.entries(res.data)
             setGroups(hueGroups)
         })
-    }, [props.url])
+    }, [props.url, lightSwitch])
 
     let toggleLights = (groupNum, on) => {
         if (on) {
             Axios.put(props.url + `/groups/${groupNum}/action`, {'on': true})
+            setLightSwitch(!lightSwitch)
         } else {
             Axios.put(props.url + `/groups/${groupNum}/action`, {'on': false})
+            setLightSwitch(!lightSwitch)
         }
     }
 
