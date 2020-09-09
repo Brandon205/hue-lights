@@ -8,7 +8,7 @@ const url = "http://192.168.1.138/api/f5y86pTphO238JSQkZSKMhXusS5l3kDsvoWhv9xw" 
 
 export default function App() {
   return (
-    <div className="App">
+    <div className="teal lighten-2 card-panel">
       <Lights url={url} />
       <Groups url={url} />
     </div>

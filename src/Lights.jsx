@@ -53,20 +53,22 @@ export default function Lights(props) {
     let content = '';
     if (lights.length > 0) {
       content = lights.map((light, id) => 
-      <div key={id - 1}>
+      <div key={id - 1} className="light">
         <h2>{light[1].name}</h2>
-        <button onClick={() => toggleLight(light[0], true)}>On</button>
-        <button onClick={() => toggleLight(light[0], false)}>Off</button>
-        {light[1].type.toLowerCase().includes("color") ? <button onClick={() => colorToggle(light[0])}>Color</button> : ''}
+        <button className="on-button" onClick={() => toggleLight(light[0], true)}>On</button>
+        <button className="off-button" onClick={() => toggleLight(light[0], false)}>Off</button>
+        {light[1].type.toLowerCase().includes("color") ? <button className="color-button" onClick={() => colorToggle(light[0])}>Color</button> : ''}
       </div>);
     }
     return (
-        <div className="lights">
-            <h1>Your Lights</h1>
+      <>
+        <h1>Your Lights</h1>
+        <div className="lights-container">
             <div className={picker ? "show" : "no-show"} id="color-picker">
               <SketchPicker color={rgb} disableAlpha={true} onChangeComplete={(color) => updateColor(color.rgb)} />
             </div>
             {content}
         </div>
+      </>
     )
 }

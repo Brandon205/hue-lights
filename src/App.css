@@ -3,28 +3,78 @@ body {
   background-color: whitesmoke;
   height: 100vh;
   width: 100vw;
+  font-family: 'Roboto', sans-serif;
 }
-
+/* 
 h1 {
   margin-top: 0;
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.75em;
 }
 
 .App {
   text-align: center;
 }
 
-.lights {
-  text-align: center;
+/* Lights CSS */
+
+/* .lights-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
+
+.light {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 15%;
+  min-width: 17vw;
+  min-height: 20vh;
+  background-color: rgb(65, 63, 63);
+  margin-top: 10px;
+  color: white;
+}
+
+.on-button, .off-button, .color-button {
+  font-size: 1.3em;
+  font-weight: lighter;
+  margin-right: 5px;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+  background-color: rgb(65, 63, 63);
+}
+
+.on-button:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.off-button:hover {
+  background-color: red;
+  color: white;
+}
+
+.color-button:hover {
+  background-color: green;
+  color: white;
+} */
 
 .show {
   z-index: 1;
   margin: auto;
   position: absolute;
   top: 30%; left: 45%; bottom: 0; right: 0;
-
 }
+
+/* Other CSS */
 
 .no-show {
   display: none;
-}
+} 
