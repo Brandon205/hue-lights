@@ -31,18 +31,21 @@ export default function Lights(props) {
     let rgbColor; // Needs to return {r: 255, g: 255, b: 255} for react-color
     Axios.get(props.url + `/lights/${lightNum}`).then(res => {
       rgbColor = xyToRGB(res.data.state.xy[0], res.data.state.xy[1])
+      console.log(rgbColor)
       setRgb(rgbColor)
     })
     setLightNumber(lightNum)
     setPicker(true)
 
-    document.body.style.backgroundColor = "lightgray"
     document.querySelector('#color-picker').classList.add('show');
     document.querySelector('#color-picker').classList.remove('no-show');
+    document.querySelector('#cover-div').classList.add('opaque-div');
+    document.querySelector('#cover-div').classList.remove('no-show');
     document.addEventListener('click', () => {
-      document.querySelector('#color-picker').classList.add('no-show');
       document.querySelector('#color-picker').classList.remove('show');
-      document.body.style.backgroundColor = "whitesmoke"
+      document.querySelector('#color-picker').classList.add('no-show');
+      document.querySelector('#cover-div').classList.add('no-show');
+      document.querySelector('#cover-div').classList.remove('opaque-div');
     }, {once: true})
   }
 

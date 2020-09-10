@@ -19,6 +19,7 @@ export default function App() {
           </ul>
         </div>
       </nav>
+      <div className="no-show" id="cover-div"></div>
       <Route exact path="/" component={Home} />
       <Route exact path="/lights" render={() => <Lights url={url} />} /> 
       <Route exact path="/groups" render={() => <Groups url={url} />} />

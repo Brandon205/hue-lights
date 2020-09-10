@@ -18,13 +18,8 @@ export default function Groups(props) {
     }, [props.url, lightSwitch])
 
     let toggleLights = (groupNum, on) => {
-        if (on) {
-            Axios.put(props.url + `/groups/${groupNum}/action`, {'on': true})
-            setLightSwitch(!lightSwitch)
-        } else {
-            Axios.put(props.url + `/groups/${groupNum}/action`, {'on': false})
-            setLightSwitch(!lightSwitch)
-        }
+        Axios.put(props.url + `/groups/${groupNum}/action`, {'on': on})
+        setLightSwitch(!lightSwitch)
     }
 
     let colorToggle = (groupNum) => { // Show the color picker for the corresponding light
