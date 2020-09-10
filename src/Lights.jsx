@@ -30,8 +30,7 @@ export default function Lights(props) {
   let colorToggle = (lightNum) => { // Show the color picker for the corresponding light
     let rgbColor; // Needs to return {r: 255, g: 255, b: 255} for react-color
     Axios.get(props.url + `/lights/${lightNum}`).then(res => {
-      rgbColor = xyToRGB(res.data.state.xy[0], res.data.state.xy[1])
-      console.log(rgbColor)
+      rgbColor = xyToRGB(res.data.state.xy[0], res.data.state.xy[1], res.data.state.bri)
       setRgb(rgbColor)
     })
     setLightNumber(lightNum)
