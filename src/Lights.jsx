@@ -18,13 +18,8 @@ export default function Lights(props) {
   }, [props.url, lightSwitch])
 
   let toggleLight = (lightNum, on) => {
-    if (on) {
-      Axios.put(props.url + `/lights/${lightNum}/state`, {"on": true})
+    Axios.put(props.url + `/lights/${lightNum}/state`, {'on': on})
       setLightSwitch(!lightSwitch)
-    } else {
-      Axios.put(props.url + `/lights/${lightNum}/state`, {"on": false})
-      setLightSwitch(!lightSwitch)
-    }
   }
 
   let colorToggle = (lightNum) => { // Show the color picker for the corresponding light

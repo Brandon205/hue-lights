@@ -10,19 +10,23 @@ const url = "http://192.168.1.138/api/f5y86pTphO238JSQkZSKMhXusS5l3kDsvoWhv9xw" 
 export default function App() {
   return (
     <Router>
-      <nav>
-        <div className="nav-wrapper">
-          <Link className="brand-logo" to="/">Hue App</Link>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><Link to="/lights">Lights</Link></li>
-            <li><Link to="/groups">Groups</Link></li>
-          </ul>
-        </div>
-      </nav>
-      <div className="no-show" id="cover-div"></div>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/lights" render={() => <Lights url={url} />} /> 
-      <Route exact path="/groups" render={() => <Groups url={url} />} />
+      <header>
+        <nav>
+          <div className="nav-wrapper">
+            <Link className="brand-logo" to="/">Hue App</Link>
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
+              <li><Link to="/lights">Lights</Link></li>
+              <li><Link to="/groups">Groups</Link></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div className="no-show" id="cover-div"></div>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/lights" render={() => <Lights url={url} />} /> 
+        <Route exact path="/groups" render={() => <Groups url={url} />} />
+      </main>
     </Router>
   )
 }
