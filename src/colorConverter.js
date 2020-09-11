@@ -19,7 +19,6 @@ export function rgbToXY(r, g, b) { // Return Format: [0.2553, 0.9112]
     let x = xx / (xx + yy + zz);
     let y = yy / (xx + yy + zz);
     //Could now use the Y value as brightness yy: scale(y, 0, 1, 0, 255).toFixed(0)
-    console.log(x, y)
     return {'x': Number.parseFloat(x).toFixed(4), 'y': Number.parseFloat(y).toFixed(4)}
 }
 
@@ -27,18 +26,16 @@ export function xyToRGB(x, y, brightness) { // Return Format: {r: 255, g: 255, b
     // Convert
     let z = 1 - x - y
     let Y = brightness
-    let X = (Y / y) * x;
+    let X = (Y / y) * x
     let Z = (Y / y) * z
     // Convert to RGB
-    let R = X  * 1.4628067 - Y * 0.1840623 - Z * 0.2743606;
-    let G = -X * 0.5217933 + Y * 1.4472381 + Z * 0.0677227;
-    let B = X  * 0.0349342 - Y * 0.0968930 + Z * 1.2884099;
+    let R =  X * 1.656492 - Y * 0.354851 - Z * 0.255038;
+    let G = -X * 0.707196 + Y * 1.655397 + Z * 0.036152;
+    let B =  X * 0.051713 - Y * 0.121364 + Z * 1.011530;
     // Reverse gamma correction
     let r = R <= 0.0031308 ? 12.92 * R : (1 + 0.055) * Math.pow(R, (1 / 2.4)) - 0.055;
     let g = G <= 0.0031308 ? 12.92 * G : (1 + 0.055) * Math.pow(G, (1 / 2.4)) - 0.055;
     let b = B <= 0.0031308 ? 12.92 * B : (1 + 0.055) * Math.pow(B, (1 / 2.4)) - 0.055;
 
-    console.log(x, y, brightness)
-    console.log({'r': r, 'g': g, 'b': b})
-    return {'r': Number.parseFloat(r).toFixed(2), 'g': Number.parseFloat(g).toFixed(2), 'b': Number.parseFloat(b).toFixed(2)}
+    return {'r': Math.round(scale(r, 0, 17, 0, 255)), 'g': Math.round(scale(g, 0, 17, 0, 255)), 'b': Math.round(scale(b, 0, 17, 0, 255))};
 }
