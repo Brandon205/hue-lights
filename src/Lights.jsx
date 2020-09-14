@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { SketchPicker } from 'react-color';
 import { rgbToXY, xyToRGB } from './colorConverter.js';
 import Axios from 'axios';
@@ -11,10 +12,12 @@ export default function Lights(props) {
   const [rgb, setRgb] = useState({"r": 255, "g": 255, "b": 255});
 
   useEffect(() => {
+    if (props.url !== "default") {
       Axios.get(props.url + '/lights').then(res => {
-          let hueLights = Object.entries(res.data)
-          setLights(hueLights)
+        let hueLights = Object.entries(res.data)
+        setLights(hueLights)
       })
+    }
   }, [props.url, lightSwitch])
 
   let toggleLight = (lightNum, on) => {
@@ -74,6 +77,7 @@ export default function Lights(props) {
     content = (
       <div className="container">
         <h1>No connected lights found</h1>
+        <h4>Or have you <Link to="/Login">connected</Link> your hue bridge yet?</h4>
       </div>
     )
   }

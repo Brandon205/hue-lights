@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { SketchPicker } from 'react-color';
 import { rgbToXY, xyToRGB } from './colorConverter.js';
 import Axios from 'axios';
@@ -11,10 +12,12 @@ export default function Groups(props) {
     const [rgb, setRgb] = useState({"r": 255, "g": 255, "b": 255}); // Color Picker color
 
     useEffect(() => {
-        Axios.get(props.url + "/groups").then(res => {
-            let hueGroups = Object.entries(res.data)
-            setGroups(hueGroups)
-        })
+        if (props.url !== "default") {
+            Axios.get(props.url + "/groups").then(res => {
+                let hueGroups = Object.entries(res.data)
+                setGroups(hueGroups)
+            })
+        }
     }, [props.url, lightSwitch])
 
     let toggleLights = (groupNum, on) => {
@@ -69,8 +72,12 @@ export default function Groups(props) {
             </div>
         );
     } else {
-        content = (<h2>No Groups made yet</h2>)
-        //TODO: Add a create form or something here
+        content = (
+            <div className="container">
+                <h1>No created groups found</h1>
+                <h4>Or have you <Link to="/Login">connected</Link> your hue bridge yet?</h4>
+            </div>);
+        //TODO: Create group form here
     }
     return (
         <div className="container">
