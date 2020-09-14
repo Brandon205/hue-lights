@@ -6,8 +6,6 @@ import Lights from './Lights';
 import Groups from './Groups';
 import './App.css';
 
-//  const url = "http://192.168.1.138/api/f5y86pTphO238JSQkZSKMhXusS5l3kDsvoWhv9xw"
-
 export default function App() {
   const [url, setUrl] = useState('default');
   const [connected, setConnected] = useState(false);

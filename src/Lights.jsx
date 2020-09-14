@@ -11,7 +11,7 @@ export default function Lights(props) {
   const [picker, setPicker] = useState(false); // Whether or not to display the Color Picker
   const [rgb, setRgb] = useState({"r": 255, "g": 255, "b": 255});
 
-  useEffect(() => {
+  useEffect(() => { // Will get all lights on page load as long as there is a URL given
     if (props.url !== "default") {
       Axios.get(props.url + '/lights').then(res => {
         let hueLights = Object.entries(res.data)
@@ -20,7 +20,7 @@ export default function Lights(props) {
     }
   }, [props.url, lightSwitch])
 
-  let toggleLight = (lightNum, on) => {
+  let toggleLight = (lightNum, on) => { // Turns a specific light on/off based on its ID
     Axios.put(props.url + `/lights/${lightNum}/state`, {'on': on})
       setLightSwitch(!lightSwitch)
   }
@@ -54,7 +54,7 @@ export default function Lights(props) {
   }
 
   let content;
-  if (lights.length > 0) {
+  if (lights.length > 0) { // Show connected lights or no connected lights message
     content = lights.map((light, id) =>
       <div className="col s6 offset-s3 m6" key={id}>
         <h2 className="header">{light[1].name}</h2>

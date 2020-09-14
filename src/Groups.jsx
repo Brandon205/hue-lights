@@ -11,7 +11,7 @@ export default function Groups(props) {
     const [groupNum, setGroupNum] = useState(0);
     const [rgb, setRgb] = useState({"r": 255, "g": 255, "b": 255}); // Color Picker color
 
-    useEffect(() => {
+    useEffect(() => { // Will get all groups as long as there is a URL given
         if (props.url !== "default") {
             Axios.get(props.url + "/groups").then(res => {
                 let hueGroups = Object.entries(res.data)
@@ -20,7 +20,7 @@ export default function Groups(props) {
         }
     }, [props.url, lightSwitch])
 
-    let toggleLights = (groupNum, on) => {
+    let toggleLights = (groupNum, on) => { // Toggles all lights in the group
         Axios.put(props.url + `/groups/${groupNum}/action`, {'on': on})
         setLightSwitch(!lightSwitch)
     }
@@ -33,7 +33,8 @@ export default function Groups(props) {
         })
         setGroupNum(groupNum)
         setPicker(true)
-  
+
+        // Set classes for different effects and to display the color picker
         document.body.style.backgroundColor = "lightgray"
         document.querySelector('#group-color-picker').classList.add('show');
         document.querySelector('#group-color-picker').classList.remove('no-show');
@@ -52,7 +53,7 @@ export default function Groups(props) {
       }
 
     let content;
-    if (groups.length > 0) {
+    if (groups.length > 0) { // Displays all groups if the useEffect found any
         content = groups.map((group, id) => 
             <div className="col s6 offset-s3 m6" key={id}>
                 <h2 className="header">{group[1].name}</h2>
