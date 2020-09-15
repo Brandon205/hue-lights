@@ -64,7 +64,7 @@ export default function Lights(props) {
               <p><span className="blue-text text-darken-3">{light[1].name}</span> is currently {light[1].state.on ? <span className="green-text text-darken-3">On</span> : <span className="red-text">Off</span>} </p>
               <p>Product Name: {light[1].productname}</p>
             </div>
-            <div className="card-action center">
+            <div className="card-action">
               <button className="btn-floating teal" onClick={() => toggleLight(light[0], true)}>On</button>
               <button className="btn-floating red" onClick={() => toggleLight(light[0], false)}>Off</button>
               {light[1].type.toLowerCase().includes("color") ? <button className="btn-floating pink" onClick={() => colorToggle(light[0])}>Color</button> : ''}
@@ -77,7 +77,7 @@ export default function Lights(props) {
     content = (
       <div className="container">
         <h1>No connected lights found</h1>
-        <h4>Or have you <Link to="/Login">connected</Link> your hue bridge yet?</h4>
+        <h4>Have you <Link to="/Login">connected</Link> your hue bridge yet?</h4>
       </div>
     )
   }

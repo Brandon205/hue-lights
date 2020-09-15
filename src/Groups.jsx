@@ -76,7 +76,7 @@ export default function Groups(props) {
         content = (
             <div className="container">
                 <h1>No created groups found</h1>
-                <h4>Or have you <Link to="/Login">connected</Link> your hue bridge yet?</h4>
+                <h4>Have you <Link to="/Login">connected</Link> your hue bridge yet?</h4>
             </div>);
         //TODO: Create group form here
     }

@@ -12,10 +12,10 @@ export default function App() {
   const [ip, setIp] = useState('');
 
   useEffect(() => { // To see if the user already has info in LS
-    if (localStorage.getItem('hue-ip') === null) {
+    if (localStorage.getItem('hue-info') === null) {
       setConnected(false)
     } else {
-      let info = localStorage.getItem('hue-ip').split(',')
+      let info = localStorage.getItem('hue-info').split(',')
       setConnected(true)
       setUrl(`https://${info[0]}/api/${info[1]}`)
     }
@@ -29,7 +29,7 @@ export default function App() {
         console.log('Link button not pressed')
       } else {
         username = res.data[0].success.username
-        localStorage.setItem('hue-ip', `${ip},${res.data[0].success.username}`)
+        localStorage.setItem('hue-info', `${ip},${res.data[0].success.username}`)
         let tempUrl = `https://${ip}/api/${username}`
         setUrl(tempUrl);
       }
@@ -48,6 +48,7 @@ export default function App() {
       <div className="container">
         <h2>Connect your Hue Bridge</h2>
         <form>
+          <label className="active" htmlFor="ip">Hue Bridge IP Address</label>
           <input className="validate" type="text" name="ip" id="ip" placeholder="Hue Bridge IP" value={ip} onChange={(e) => setIp(e.target.value)} required />
           <input type="submit" value="Connect" onClick={(e) => updateUrl(e)} />
         </form>
