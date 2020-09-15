@@ -51,6 +51,9 @@ export default function App() {
           <input className="validate" type="text" name="ip" id="ip" placeholder="Hue Bridge IP" value={ip} onChange={(e) => setIp(e.target.value)} required />
           <input type="submit" value="Connect" onClick={(e) => updateUrl(e)} />
         </form>
+        <div className="tooltip">How to find a Hue Bridge IP Address
+          <span className="tooltiptext">To Find your Hue Bridges IP Address: 1. Open the Hue App and go to Settings/Your Bridge/Network Settings 2. Disable DHCP, note the IP, turn DHCP back on</span>
+        </div>
         </div>
     )
   }
