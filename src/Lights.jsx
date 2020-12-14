@@ -77,7 +77,7 @@ export default function Lights(props) {
     content = (
       <div className="container">
         <h1>No connected lights found</h1>
-        <h4>Have you <Link to="/Login">connected</Link> your hue bridge yet?</h4>
+        <h4>Have you <Link to="/login">connected</Link> your hue bridge yet?</h4>
       </div>
     )
   }

@@ -4,15 +4,16 @@ import Axios from 'axios';
 import Home from './Home';
 import Lights from './Lights';
 import Groups from './Groups';
+import Connect from './Connect';
 import './App.css';
 
 export default function App() {
   const [url, setUrl] = useState('default');
   const [connected, setConnected] = useState(false);
-  const [ip, setIp] = useState('');
+  const [ip, setIp] = useState('192.168.1.138');
 
   useEffect(() => { // To see if the user already has info in LS
-    if (localStorage.getItem('hue-info') === null) {
+    if (localStorage.getItem('hue-info') === null) { //TODO add a better check than just LS (contact hue api to check for errors?)
       setConnected(false)
     } else {
       let info = localStorage.getItem('hue-info').split(',')
@@ -23,13 +24,13 @@ export default function App() {
 
   let updateUrl = (e) => { // Sets the URL for the REST API
     e.preventDefault();
-    let username;
     Axios.post(`https://${ip}/api`, {"devicetype": "YAHWA#user"}).then(res => {
-      if (res.data[0].error) {
-        console.log('Link button not pressed')
+      if (res.data[0].error.type === 101) {
+        console.log('Link button not pressed') //TODO Make error show on screen
       } else {
-        username = res.data[0].success.username
-        localStorage.setItem('hue-info', `${ip},${res.data[0].success.username}`)
+        let username = res.data[0].success.username
+        console.log(username)
+        localStorage.setItem('hue-info', `${ip},${username}`)
         let tempUrl = `https://${ip}/api/${username}`
         setUrl(tempUrl);
       }
@@ -37,10 +38,10 @@ export default function App() {
   }
 
   let login;
-  if (connected) { // Check if Bridge is connected to display login or success message respectively TODO: Add disconnect button to connected message (resets LS)
+  if (connected) { // Check if Bridge is connected to display login or success message respectively TODO: Add disconnect button to connected message (resets LS and IP in the state)
     login = (
       <div className="container">
-        <h2>Your Hue bridge is <span className="green-text text-darken-3">connected</span>.</h2>
+        <h2>Your Hue bridge is <Link to='/connect' className="green-text text-darken-3">connected</Link>.</h2>
       </div>
     )
   } else {
@@ -53,7 +54,7 @@ export default function App() {
           <input type="submit" value="Connect" onClick={(e) => updateUrl(e)} />
         </form>
         <div className="tooltip">How to find a Hue Bridge IP Address
-          <span className="tooltiptext">To Find your Hue Bridges IP Address: 1. Open the Hue App and go to Settings/Your Bridge/Network Settings 2. Disable DHCP, note the IP, turn DHCP back on</span>
+          <span className="tooltiptext">To find your Hue Bridges' IP Address: 1. Open the Hue App and go settings/Hue Bridges 2. Find the Bridge you want to connect to and hit the i icon on the right hand side 3. Note the IP shown there</span>
         </div>
         </div>
     )
@@ -77,6 +78,7 @@ export default function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/lights" render={() => <Lights url={url} />} /> 
         <Route exact path="/groups" render={() => <Groups url={url} />} />
+        <Route exact path="/connect" render={() => <Connect url={url} updateURL={updateUrl} ip={ip} setIP={setIp} />} />
         {login}
       </main>
     </Router>
