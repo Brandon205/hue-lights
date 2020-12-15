@@ -38,6 +38,7 @@ export default function App() {
         localStorage.setItem('hue-info', `${ip},${username}`)
         let tempUrl = `https://${ip}/api/${username}`
         setUrl(tempUrl);
+        setConnected(true)
         createToast('Connection success!')
       }
     })
