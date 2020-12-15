@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom';
+import M from 'materialize-css';
 import Axios from 'axios';
 import Home from './Home';
 import Lights from './Lights';
@@ -10,7 +11,8 @@ import './App.css';
 export default function App() {
   const [url, setUrl] = useState('default');
   const [connected, setConnected] = useState(false);
-  const [ip, setIp] = useState('192.168.1.138');
+  const [ip, setIp] = useState('');
+  const [redirect, setRedirect] = useState(false)
 
   useEffect(() => { // To see if the user already has info in LS
     if (localStorage.getItem('hue-info') === null) { //TODO: add a better check than just LS (contact hue api to check for errors?)
@@ -24,25 +26,39 @@ export default function App() {
 
   let updateUrl = (e) => { // Sets the URL for the REST API
     e.preventDefault();
-    Axios.post(`https://${ip}/api`, {"devicetype": "YAHWA#user"}).then(res => { // when successful res.data is {'success': 'HUE_USERNAME'}
+    Axios.post(`https://${ip}/api`, {"devicetype": "YAHWA#user"}).then(res => {
       if (res.data[0].error) {
-        console.log(res.data);
-        console.log('Link button not pressed') //TODO Make error show on screen (Only know about this possible error message so for so just display this one)
+        if (res.data[0].error.type === 101) {
+          createToast('Link button not pressed')
+        } else {
+          createToast('Another error occured, please try again')
+        }
       } else {
         let username = res.data[0].success.username
-        console.log(username)
         localStorage.setItem('hue-info', `${ip},${username}`)
         let tempUrl = `https://${ip}/api/${username}`
         setUrl(tempUrl);
+        createToast('Connection success!')
       }
     })
   }
 
+  let createToast = (message) => {
+    M.toast({html: message})
+  }
+
+  let disconnect = () => {
+    setIp('')
+    localStorage.removeItem('hue-info')
+    setRedirect(true)
+  }
+
   let login;
-  if (connected) { // Check if Bridge is connected to display login or success message respectively TODO: Add disconnect button to connected message (resets LS and IP in the state)
+  if (connected) {
     login = (
       <div className="container">
         <h2>Your Hue bridge is <Link to='/connect' className="green-text text-darken-3">connected</Link>.</h2>
+        <button className="btn red" onClick={disconnect}>Disconnect</button>
       </div>
     )
   } else {
@@ -71,6 +87,7 @@ export default function App() {
               <li><Link to="/lights">Lights</Link></li>
               <li><Link to="/groups">Groups</Link></li>
             </ul>
+            {redirect ? <Redirect to="/connect" /> : ''}
           </div>
         </nav>
       </header>
