@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/hue-lights/precache-manifest.7a28a9d0f1b5b85898ab1e4bd5ff095d.js"
+  "/hue-lights/precache-manifest.67b870124d15909995f10ed9ae181972.js"
 );
 
 self.addEventListener('message', (event) => {
