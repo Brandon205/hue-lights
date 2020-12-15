@@ -13,7 +13,7 @@ export default function App() {
   const [ip, setIp] = useState('192.168.1.138');
 
   useEffect(() => { // To see if the user already has info in LS
-    if (localStorage.getItem('hue-info') === null) { //TODO add a better check than just LS (contact hue api to check for errors?)
+    if (localStorage.getItem('hue-info') === null) { //TODO: add a better check than just LS (contact hue api to check for errors?)
       setConnected(false)
     } else {
       let info = localStorage.getItem('hue-info').split(',')
@@ -25,7 +25,8 @@ export default function App() {
   let updateUrl = (e) => { // Sets the URL for the REST API
     e.preventDefault();
     Axios.post(`https://${ip}/api`, {"devicetype": "YAHWA#user"}).then(res => {
-      if (res.data[0].error.type === 101) {
+      if (res.data[0].error) { // DEPLOYED ERROR: Cannot read property 'type' of undefined
+        console.log(res.data);
         console.log('Link button not pressed') //TODO Make error show on screen
       } else {
         let username = res.data[0].success.username
