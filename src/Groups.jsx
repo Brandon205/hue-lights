@@ -64,9 +64,12 @@ export default function Groups(props) {
                             <p>Lights are currently {group[1].state.any_on ? <span className="green-text text-darken-3">On</span> : <span className="red-text">Off</span>} </p>
                         </div>
                         <div className="card-action center">
-                            <button className="btn-floating teal" onClick={() => toggleLights(group[0], true)}>On</button>
+                            {/* <button className="btn-floating teal" onClick={() => toggleLights(group[0], true)}>On</button>
                             <button className="btn-floating red" onClick={() => toggleLights(group[0], false)}>Off</button>
-                            <button className="btn-floating pink" onClick={() => colorToggle(group[0])}>Color</button>
+                            <button className="btn-floating pink" onClick={() => colorToggle(group[0])}>Color</button> */}
+                            <button className="waves-effect waves-light btn teal" onClick={() => toggleLights(group[0], true)}>On</button>
+                            <button className="waves-effect waves-light btn red" onClick={() => toggleLights(group[0], false)}>Off</button>
+                            <button className="waves-effect waves-light btn pink" onClick={() => colorToggle(group[0])}>Color</button>
                         </div>
                     </div>
                 </div>
