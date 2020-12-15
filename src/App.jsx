@@ -24,10 +24,10 @@ export default function App() {
 
   let updateUrl = (e) => { // Sets the URL for the REST API
     e.preventDefault();
-    Axios.post(`https://${ip}/api`, {"devicetype": "YAHWA#user"}).then(res => {
-      if (res.data[0].error) { // DEPLOYED ERROR: Cannot read property 'type' of undefined
+    Axios.post(`https://${ip}/api`, {"devicetype": "YAHWA#user"}).then(res => { // when successful res.data is {'success': 'HUE_USERNAME'}
+      if (res.data[0].error) {
         console.log(res.data);
-        console.log('Link button not pressed') //TODO Make error show on screen
+        console.log('Link button not pressed') //TODO Make error show on screen (Only know about this possible error message so for so just display this one)
       } else {
         let username = res.data[0].success.username
         console.log(username)
