@@ -60,8 +60,8 @@ export default function Groups(props) {
                 <div className="card horizontal">
                     <div className="card-stacked">
                         <div className="card-content">
+                            <img src={`${process.env.PUBLIC_URL}/images/${group[1].class}.svg`} alt={group[1].class} />
                             <p>Lights are currently {group[1].state.any_on ? <span className="green-text text-darken-3">On</span> : <span className="red-text">Off</span>} </p>
-                            <p>Group Type: {group[1].type}</p>
                         </div>
                         <div className="card-action center">
                             <button className="btn-floating teal" onClick={() => toggleLights(group[0], true)}>On</button>

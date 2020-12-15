@@ -57,16 +57,19 @@ export default function Lights(props) {
   if (lights.length > 0) { // Show connected lights or no connected lights message
     content = lights.map((light, id) =>
       <div className="col s6 offset-s3 m6" key={id}>
-        <h2 className="header">{light[1].name}</h2>
+        {/* <h2 className="header">{light[1].name}</h2> */}
         <div className="card horizontal">
           <div className="card-stacked">
             <div className="card-content">
+              <img src={`${process.env.PUBLIC_URL}/images/${light[1].productname}.svg`} alt={light[1].productname} />
               <p><span className="blue-text text-darken-3">{light[1].name}</span> is currently {light[1].state.on ? <span className="green-text text-darken-3">On</span> : <span className="red-text">Off</span>} </p>
               <p>Product Name: {light[1].productname}</p>
             </div>
             <div className="card-action">
               <button className="btn-floating teal" onClick={() => toggleLight(light[0], true)}>On</button>
               <button className="btn-floating red" onClick={() => toggleLight(light[0], false)}>Off</button>
+              {/* <button className="btn-floating teal" onClick={() => toggleLight(light[0], true)}><img src={`${process.env.PUBLIC_URL}/images/SwitchOn.svg`} alt="on" /></button>
+              <button className="btn-floating red" onClick={() => toggleLight(light[0], false)}><img src={`${process.env.PUBLIC_URL}/images/SwitchOff.svg`} alt="off" /></button> */}
               {light[1].type.toLowerCase().includes("color") ? <button className="btn-floating pink" onClick={() => colorToggle(light[0])}>Color</button> : ''}
             </div>
           </div>
