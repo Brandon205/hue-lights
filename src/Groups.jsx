@@ -56,20 +56,17 @@ export default function Groups(props) {
     if (groups.length > 0) { // Displays all groups if the useEffect found any
         content = groups.map((group, id) => 
             <div className="col s6 offset-s3 m6" key={id}>
-                <h2 className="header">{group[1].name}</h2>
                 <div className="card horizontal">
                     <div className="card-stacked">
                         <div className="card-content">
+                            <h4 className="header">{group[1].name}</h4>
                             <img src={`${process.env.PUBLIC_URL}/images/${group[1].class}.svg`} alt={group[1].class} />
-                            <p>Lights are currently {group[1].state.any_on ? <span className="green-text text-darken-3">On</span> : <span className="red-text">Off</span>} </p>
+                            <p>Lights are currently {group[1].state.any_on ? <span className="green-text bold">On</span> : <span className="red-text ">Off</span>} </p>
                         </div>
-                        <div className="card-action center">
-                            {/* <button className="btn-floating teal" onClick={() => toggleLights(group[0], true)}>On</button>
-                            <button className="btn-floating red" onClick={() => toggleLights(group[0], false)}>Off</button>
-                            <button className="btn-floating pink" onClick={() => colorToggle(group[0])}>Color</button> */}
-                            <button className="waves-effect waves-light btn teal" onClick={() => toggleLights(group[0], true)}>On</button>
-                            <button className="waves-effect waves-light btn red" onClick={() => toggleLights(group[0], false)}>Off</button>
-                            <button className="waves-effect waves-light btn pink" onClick={() => colorToggle(group[0])}>Color</button>
+                        <div className="card-action">
+                            <button className="waves-effect waves-light btn-large teal" onClick={() => toggleLights(group[0], true)}>On</button>
+                            <button className="waves-effect waves-light btn-large red" onClick={() => toggleLights(group[0], false)}>Off</button>
+                            <button className="waves-effect waves-light btn-large pink" onClick={() => colorToggle(group[0])}>Color</button>
                         </div>
                     </div>
                 </div>
@@ -81,10 +78,10 @@ export default function Groups(props) {
                 <h1>No created groups found</h1>
                 <h4>Have you <Link to="/Login">connected</Link> your hue bridge yet?</h4>
             </div>);
-        //TODO: Create group form here
     }
     return (
         <div className="container">
+            <h2>Groups</h2>
             <div className={picker ? "show" : "no-show"} id="group-color-picker">
               <SketchPicker color={rgb} disableAlpha={true} onChangeComplete={(color) => updateColor(color.rgb)} />
             </div>

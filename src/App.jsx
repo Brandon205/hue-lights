@@ -57,14 +57,14 @@ export default function App() {
   let login;
   if (connected) {
     login = (
-      <div className="container">
+      <div className="container bottom-gap">
         <h2>Your Hue bridge is <Link to='/connect' className="green-text text-darken-3">connected</Link>.</h2>
         <button className="btn red" onClick={disconnect}>Disconnect</button>
       </div>
     )
   } else {
     login = (
-      <div className="container">
+      <div className="container bottom-gap">
         <h2>Connect your Hue Bridge</h2>
         <form>
           <label className="active" htmlFor="ip">Hue Bridge IP Address</label>
