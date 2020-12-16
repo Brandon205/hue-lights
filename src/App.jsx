@@ -80,6 +80,7 @@ export default function App() {
 
   return (
     <Router>
+      <div className="no-show" id="cover-div"></div>
       <header>
         <nav>
           <div className="nav-wrapper">
@@ -93,7 +94,7 @@ export default function App() {
         </nav>
       </header>
       <main>
-        <div className="no-show" id="cover-div"></div>
+        {/* <div className="no-show" id="cover-div"></div> */}
         <Route exact path="/" component={Home} />
         <Route exact path="/lights" render={() => <Lights url={url} sendToast={createToast} />} /> 
         <Route exact path="/groups" render={() => <Groups url={url} sendToast={createToast} />} />

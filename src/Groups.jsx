@@ -100,7 +100,7 @@ export default function Groups(props) {
     }
     return (
         <div className="container">
-            <h2>Groups</h2>
+            <h2 style={{"marginTop": 0}}>Groups</h2>
             <div className={picker ? "show" : "no-show"} id="group-color-picker">
               <SketchPicker color={rgb} disableAlpha={true} onChangeComplete={(color) => updateColor(color.rgb)} />
             </div>

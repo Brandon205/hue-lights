@@ -103,9 +103,9 @@ export default function Lights(props) {
   }
   return (
     <div className="container">
-      <h2>Lights</h2>
+      <h2 style={{"marginTop": 0}}>Lights</h2>
       <div className={picker ? "show" : "no-show"} id="color-picker">
-        <SketchPicker color={rgb} disableAlpha={true} onChangeComplete={(color) => updateColor(color.rgb)} />
+        <SketchPicker width="15vw" color={rgb} disableAlpha={true} onChangeComplete={(color) => updateColor(color.rgb)} />
       </div>
       <div className="container">
         {content}
