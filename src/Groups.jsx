@@ -43,14 +43,26 @@ export default function Groups(props) {
           document.querySelector('#group-color-picker').classList.remove('show');
           document.body.style.backgroundColor = "whitesmoke"
         }, {once: true})
-      }
+    }
   
-      let updateColor = (color) => { // For the onChangeComplete of the ColorPicker
+    let updateColor = (color) => { // For the onChangeComplete of the ColorPicker
         let xyColor = rgbToXY(color.r, color.g, color.b) // Needs to return [0.2345, 0.9876] for the Hue API
         xyColor.x = parseFloat(xyColor.x)
         xyColor.y = parseFloat(xyColor.y)
         Axios.put(props.url + `/groups/${groupNum}/action`, {"xy": [xyColor.x, xyColor.y]})
-      }
+    }
+
+    let updateBrightness = (e, groupNumber) => {
+        e.preventDefault()
+        let brightness = Number(e.target.elements[0].value)
+        if (brightness > 254 || brightness < 0) {
+        props.sendToast('Needs to be a value between 0 and 254')
+        return;
+        } else {
+        Axios.put(props.url + `/groups/${groupNumber}/action`, {"bri": brightness})
+        props.sendToast(`Set the brightness to ${brightness} on group number ${groupNumber}`)
+        }
+    }
 
     let content;
     if (groups.length > 0) { // Displays all groups if the useEffect found any
@@ -67,6 +79,12 @@ export default function Groups(props) {
                             <button className="waves-effect waves-light btn-large teal" onClick={() => toggleLights(group[0], true)}>On</button>
                             <button className="waves-effect waves-light btn-large red" onClick={() => toggleLights(group[0], false)}>Off</button>
                             <button className="waves-effect waves-light btn-large pink" onClick={() => colorToggle(group[0])}>Color</button>
+                            <form onSubmit={(e) => updateBrightness(e, group[0])}>
+                                <input className="validate" type="text" name="brightness" placeholder={"Brightness: " + group[1].action.bri + " (between 0 and 254)"} />
+                                <div className="input-field inline">
+                                    <input type="submit" className="validate" />
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -53,6 +53,18 @@ export default function Lights(props) {
     Axios.put(props.url + `/lights/${lightNumber}/state`, {"xy": [xyColor.x, xyColor.y]})
   }
 
+  let updateBrightness = (e, lightNumber) => {
+    e.preventDefault()
+    let brightness = Number(e.target.elements[0].value)
+    if (brightness > 254 || brightness < 0) {
+      props.sendToast('Needs to be a value between 0 and 254')
+      return;
+    } else {
+      Axios.put(props.url + `/lights/${lightNumber}/state`, {"bri": brightness})
+      props.sendToast(`Set the brightness to ${brightness} on light number ${lightNumber}`)
+    }
+  }
+
   let content;
   if (lights.length > 0) { // Show connected lights or no connected lights message
     content = lights.map((light, id) =>
@@ -69,6 +81,12 @@ export default function Lights(props) {
               <button className="waves-effect waves-light btn-large teal" onClick={() => toggleLight(light[0], true)}>On</button>
               <button className="waves-effect waves-light btn-large red" onClick={() => toggleLight(light[0], false)}>Off</button>
               {light[1].type.toLowerCase().includes("color") ? <button className="waves-effect waves-light btn-large pink" onClick={() => colorToggle(light[0])}>Color</button> : ''}
+              <form onSubmit={(e) => updateBrightness(e, light[0])}>
+                <input className="validate" type="text" name="brightness" placeholder={"Brightness: " + light[1].state.bri + " (between 0 and 254)"} />
+                <div className="input-field inline">
+                  <input type="submit" className="validate" />
+                </div>
+              </form>
             </div>
           </div>
         </div>
