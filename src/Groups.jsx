@@ -79,11 +79,11 @@ export default function Groups(props) {
                             <button className="waves-effect waves-light btn-large teal" onClick={() => toggleLights(group[0], true)}>On</button>
                             <button className="waves-effect waves-light btn-large red" onClick={() => toggleLights(group[0], false)}>Off</button>
                             <button className="waves-effect waves-light btn-large pink" onClick={() => colorToggle(group[0])}>Color</button>
-                            <form onSubmit={(e) => updateBrightness(e, group[0])}>
-                                <input className="validate" type="text" name="brightness" placeholder={"Brightness: " + group[1].action.bri + " (between 0 and 254)"} />
-                                <div className="input-field inline">
-                                    <input type="submit" className="validate" />
+                            <form autoComplete="off" onSubmit={(e) => updateBrightness(e, group[0])}>
+                                <div className="container">
+                                    <input className="validate" type="text" name="brightness" placeholder={"Brightness: " + group[1].action.bri + " (between 0 and 254)"} />
                                 </div>
+                                <button className="waves-effect waves-light btn-large grey">Update Brightness</button>
                             </form>
                         </div>
                     </div>
@@ -103,7 +103,9 @@ export default function Groups(props) {
             <div className={picker ? "show" : "no-show"} id="group-color-picker">
               <SketchPicker color={rgb} disableAlpha={true} onChangeComplete={(color) => updateColor(color.rgb)} />
             </div>
-            {content}
+            <div className="container">
+                {content}
+            </div>
         </div>
     )
 }
