@@ -29,9 +29,9 @@ export default function App() {
     Axios.post(`https://${ip}/api`, {"devicetype": "YAHWA#user"}).then(res => {
       if (res.data[0].error) {
         if (res.data[0].error.type === 101) {
-          createToast('Link button not pressed')
+          createToast('Link button not pressed', 'red')
         } else {
-          createToast('Another error occured, please try again')
+          createToast('An error occured, please try again', 'red')
         }
       } else {
         let username = res.data[0].success.username
@@ -39,13 +39,13 @@ export default function App() {
         let tempUrl = `https://${ip}/api/${username}`
         setUrl(tempUrl);
         setConnected(true)
-        createToast('Connection success!')
+        createToast('Connection success!', 'green')
       }
     })
   }
 
-  let createToast = (message) => {
-    M.toast({html: message})
+  let createToast = (message, classes="") => {
+    M.toast({html: message, classes: classes})
   }
 
   let disconnect = () => {

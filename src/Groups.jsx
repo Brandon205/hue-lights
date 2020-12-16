@@ -56,11 +56,11 @@ export default function Groups(props) {
         e.preventDefault()
         let brightness = Number(e.target.elements[0].value)
         if (brightness > 254 || brightness < 0) {
-        props.sendToast('Needs to be a value between 0 and 254')
+        props.sendToast('Needs to be a value between 0 and 254', 'red')
         return;
         } else {
         Axios.put(props.url + `/groups/${groupNumber}/action`, {"bri": brightness})
-        props.sendToast(`Set the brightness to ${brightness} on group number ${groupNumber}`)
+        props.sendToast(`Set the brightness to ${brightness} on group number ${groupNumber}`, 'green')
         }
     }
 
