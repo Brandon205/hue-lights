@@ -72,6 +72,7 @@ export default function Groups(props) {
                     <div className="card-stacked">
                         <div className="card-content">
                             <h4 className="header">{group[1].name}</h4>
+                            {lightSwitch}
                             <img src={`${process.env.PUBLIC_URL}/images/${group[1].class}.svg`} alt={group[1].class} />
                             <p>Lights are currently {group[1].state.any_on ? <span className="green-text bold">On</span> : <span className="red-text ">Off</span>} </p>
                         </div>

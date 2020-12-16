@@ -73,6 +73,7 @@ export default function Lights(props) {
           <div className="card-stacked">
             <div className="card-content">
               <h4 className="header">{light[1].name}</h4>
+              {lightSwitch}
               <img src={`${process.env.PUBLIC_URL}/images/${light[1].productname}.svg`} alt={light[1].productname} />
               <p><span className="blue-text bold">{light[1].name}</span> is currently {light[1].state.on ? <span className="green-text bold">On</span> : <span className="red-text bold">Off</span>} </p>
               <p>Product Name: {light[1].productname}</p>
