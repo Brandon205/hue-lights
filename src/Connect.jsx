@@ -8,7 +8,7 @@ export default function Login(props) {
             <form autoComplete="off">
                 <label className="active" htmlFor="ip">Hue Bridge IP Address</label>
                 <div className="container">
-                    <input className="validate" type="text" name="ip" id="ip" placeholder="Hue Bridge IP" value={props.ip} onChange={(e) => props.setIp(e.target.value)} required />
+                    <input className="validate" type="text" name="ip" id="ip" placeholder="Hue Bridge IP" value={props.ip} onChange={(e) => props.setIP(e.target.value)} required />
                 </div>
                 <button className="waves-effect waves-light btn-large grey" onClick={(e) => props.updateURL(e)}>Connect</button>
             </form>
