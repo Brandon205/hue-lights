@@ -5,7 +5,6 @@ import Axios from 'axios';
 import Home from './Home';
 import Lights from './Lights';
 import Groups from './Groups';
-import Connect from './Connect';
 import './App.css';
 
 export default function App() {
@@ -22,6 +21,17 @@ export default function App() {
       setConnected(true)
       setUrl(`https://${info[0]}/api/${info[1]}`)
     }
+
+    // Set the IP Address by default
+    Axios.get("https://discovery.meethue.com").then((res) => {
+      if (res.data[0].internalipaddress) {
+        setIp(res.data[0].internalipaddress)
+        createToast('Autofilled your Hue\'s IP Address', 'green')
+      } else {
+        createToast('Not able to find IP Address of a Bridge on your WiFi', 'orange')
+      }
+    })
+
   }, [])
 
   let updateUrl = (e) => { // Sets the URL for the REST API
@@ -71,15 +81,16 @@ export default function App() {
           <input className="validate" type="text" name="ip" id="ip" placeholder="Hue Bridge IP" value={ip} onChange={(e) => setIp(e.target.value)} required />
           <input type="submit" value="Connect" onClick={(e) => updateUrl(e)} />
         </form>
+        <p>Make sure to press the link button on the Hue Bridge within 1 minute before pressing connect</p>
         <div className="tooltip">How to find a Hue Bridge IP Address
-          <span className="tooltiptext">To find your Hue Bridges' IP Address: 1. Open the Hue App and go settings/Hue Bridges 2. Find the Bridge you want to connect to and hit the i icon on the right hand side 3. Note the IP shown there</span>
+          <span className="tooltiptext">If the IP field isn't autofilled: 1. Open the Hue App and go settings/Hue Bridges 2. Find the Bridge you want to connect to and hit the i icon on the right hand side 3. Note the IP shown there, hit the pairing button on the Hue Bridge and click on connect.</span>
         </div>
         </div>
     )
   }
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div className="no-show" id="cover-div"></div>
       <header>
         <nav>
@@ -89,16 +100,14 @@ export default function App() {
               <li><Link to="/lights">Lights</Link></li>
               <li><Link to="/groups">Groups</Link></li>
             </ul>
-            {redirect ? <Redirect to="/connect" /> : ''}
+            {redirect ? <Redirect to="/" /> : ''}
           </div>
         </nav>
       </header>
       <main>
-        {/* <div className="no-show" id="cover-div"></div> */}
         <Route exact path="/" component={Home} />
-        <Route exact path="/lights" render={() => <Lights url={url} sendToast={createToast} />} /> 
-        <Route exact path="/groups" render={() => <Groups url={url} sendToast={createToast} />} />
-        <Route exact path="/connect" render={() => <Connect url={url} updateURL={updateUrl} ip={ip} setIP={setIp} />} />
+        <Route path="/lights" render={() => <Lights url={url} sendToast={createToast} />} /> 
+        <Route path="/groups" render={() => <Groups url={url} sendToast={createToast} />} />
         {login}
       </main>
     </Router>
