@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/hue-lights/static/css/main.e2529acd.chunk.css",
-    "main.js": "/hue-lights/static/js/main.b0ca0d1c.chunk.js",
-    "main.js.map": "/hue-lights/static/js/main.b0ca0d1c.chunk.js.map",
+    "main.js": "/hue-lights/static/js/main.ace50c73.chunk.js",
+    "main.js.map": "/hue-lights/static/js/main.ace50c73.chunk.js.map",
     "runtime-main.js": "/hue-lights/static/js/runtime-main.1d61fbc0.js",
     "runtime-main.js.map": "/hue-lights/static/js/runtime-main.1d61fbc0.js.map",
     "static/js/2.75f4272b.chunk.js": "/hue-lights/static/js/2.75f4272b.chunk.js",
     "static/js/2.75f4272b.chunk.js.map": "/hue-lights/static/js/2.75f4272b.chunk.js.map",
     "index.html": "/hue-lights/index.html",
-    "precache-manifest.abbd8d33095361b785c01e6ac2c8e1ee.js": "/hue-lights/precache-manifest.abbd8d33095361b785c01e6ac2c8e1ee.js",
+    "precache-manifest.2f090274a03fed3672d0ee5cfbab76d0.js": "/hue-lights/precache-manifest.2f090274a03fed3672d0ee5cfbab76d0.js",
     "service-worker.js": "/hue-lights/service-worker.js",
     "static/css/main.e2529acd.chunk.css.map": "/hue-lights/static/css/main.e2529acd.chunk.css.map",
     "static/js/2.75f4272b.chunk.js.LICENSE.txt": "/hue-lights/static/js/2.75f4272b.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.1d61fbc0.js",
     "static/js/2.75f4272b.chunk.js",
     "static/css/main.e2529acd.chunk.css",
-    "static/js/main.b0ca0d1c.chunk.js"
+    "static/js/main.ace50c73.chunk.js"
   ]
 }
