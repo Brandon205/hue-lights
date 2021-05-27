@@ -24,7 +24,7 @@ export default function App() {
 
     // Set the IP Address by default
     Axios.get("https://discovery.meethue.com").then((res) => {
-      if (res.data[0].internalipaddress) {
+      if (res.data[0] !== undefined) {
         setIp(res.data[0].internalipaddress)
         createToast('Autofilled your Hue\'s IP Address', 'green')
       } else {
@@ -68,7 +68,7 @@ export default function App() {
   if (connected) {
     login = (
       <div className="container bottom-gap">
-        <h2>Your Hue bridge is <Link to='/connect' className="green-text text-darken-3">connected</Link>.</h2>
+        <h2>Your Hue bridge is <Link to='/login' className="green-text text-darken-3">connected</Link>.</h2>
         <button className="btn red" onClick={disconnect}>Disconnect</button>
       </div>
     )
@@ -105,10 +105,10 @@ export default function App() {
         </nav>
       </header>
       <main>
+        {login}
         <Route exact path="/" component={Home} />
         <Route path="/lights" render={() => <Lights url={url} sendToast={createToast} />} /> 
         <Route path="/groups" render={() => <Groups url={url} sendToast={createToast} />} />
-        {login}
       </main>
     </Router>
   )
