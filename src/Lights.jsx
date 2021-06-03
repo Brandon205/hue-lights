@@ -16,6 +16,8 @@ export default function Lights(props) {
       Axios.get(props.url + '/lights').then(res => {
         let hueLights = Object.entries(res.data)
         setLights(hueLights)
+      }).catch(err => {
+        console.log(err);
       })
     }
   }, [props.url, lightSwitch])
@@ -30,6 +32,8 @@ export default function Lights(props) {
     Axios.get(props.url + `/lights/${lightNum}`).then(res => {
       rgbColor = xyToRGB(res.data.state.xy[0], res.data.state.xy[1], res.data.state.bri)
       setRgb(rgbColor)
+    }).catch(err => {
+      console.log(err);
     })
     setLightNumber(lightNum)
     setPicker(true)
