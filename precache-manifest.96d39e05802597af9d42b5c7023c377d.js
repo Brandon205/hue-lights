@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "68f909ca824da83e3c76a10dc13c08ec",
+    "revision": "ff9eadcf23dafb43548b1c45dea644a1",
     "url": "/hue-lights/index.html"
   },
   {
-    "revision": "3d86a8e71bf9c321c162",
-    "url": "/hue-lights/static/css/main.01f0b1ff.chunk.css"
+    "revision": "2c966903f704b633d18e",
+    "url": "/hue-lights/static/css/main.92a63c5e.chunk.css"
   },
   {
     "revision": "4b96fc34fd546af59b22",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/hue-lights/static/js/2.607f43e3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3d86a8e71bf9c321c162",
-    "url": "/hue-lights/static/js/main.ccd5dabf.chunk.js"
+    "revision": "2c966903f704b633d18e",
+    "url": "/hue-lights/static/js/main.b2f67460.chunk.js"
   },
   {
     "revision": "d4b058643230bee0c065",
