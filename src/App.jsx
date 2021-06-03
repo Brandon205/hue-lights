@@ -83,7 +83,7 @@ export default function App() {
         </form>
         <p>Make sure to press the link button on the Hue Bridge within 1 minute before pressing connect</p>
         <div className="tooltip">How to find a Hue Bridge IP Address
-          <span className="tooltiptext">If the IP field isn't autofilled: 1. Open the Hue App and go settings/Hue Bridges 2. Find the Bridge you want to connect to and hit the i icon on the right hand side 3. Note the IP shown there, hit the pairing button on the Hue Bridge and click on connect.</span>
+          <span className="tooltiptext">If the IP field isn't autofilled: 1. Open the Hue App and go settings/Hue Bridges 2. Find the Bridge you want to connect to and hit the i icon 3. Copy the IP shown there, hit the pairing button on the Hue Bridge and click Connect.</span>
         </div>
         </div>
     )
@@ -95,7 +95,7 @@ export default function App() {
       <header>
         <nav>
           <div className="nav-wrapper">
-            <Link className="brand-logo" to="/">Hue App</Link>
+            <Link className="brand-logo" to="/">Hue Lite</Link>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><Link to="/lights">Lights</Link></li>
               <li><Link to="/groups">Groups</Link></li>

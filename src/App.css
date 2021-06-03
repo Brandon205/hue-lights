@@ -104,3 +104,19 @@
 .no-show {
   display: none;
 } 
+
+.faq {
+  color: lightseagreen;
+  font-weight: bold;
+}
+
+.question {
+  font-size: 2.5em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.description {
+  font-size: 1.5em;
+  transition-duration: 1s;
+}

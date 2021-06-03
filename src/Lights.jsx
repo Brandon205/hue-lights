@@ -5,7 +5,7 @@ import { rgbToXY, xyToRGB } from './colorConverter.js';
 import Axios from 'axios';
 
 export default function Lights(props) {
-  const [lightSwitch, setLightSwitch] = useState(false); // To refetch the API when the lights are toggled
+  const [lightSwitch, setLightSwitch] = useState(false); // To hopefully refetch the API when the lights are toggled
   const [lights, setLights] = useState([]);
   const [lightNumber, setLightNumber] = useState(0); // Set this value to whatever light the colorpicker is for at that time
   const [picker, setPicker] = useState(false); // Whether or not to display the Color Picker
@@ -19,6 +19,7 @@ export default function Lights(props) {
       }).catch(err => {
         console.log(err);
       })
+      console.log("fetched")
     }
   }, [props.url, lightSwitch])
 
