@@ -89,7 +89,7 @@ export default function Lights(props) {
               {light[1].type.toLowerCase().includes("color") ? <button className="waves-effect waves-light btn-large pink" onClick={() => colorToggle(light[0])}>Color</button> : ''}
               <form autoComplete="off" onSubmit={(e) => updateBrightness(e, light[0])}>
                 <div className="container">
-                  <input className="validate" type="text" name="brightness" placeholder={"Brightness: " + light[1].state.bri + " (between 0 and 254)"} />
+                  <input className="validate" type="text" name="brightness" placeholder={"Current Brightness: " + light[1].state.bri + " (between 0 and 254)"} />
                 </div>
                 <button className="waves-effect waves-light btn-large grey">Update Brightness</button>
               </form>
