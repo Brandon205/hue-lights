@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "68a17fd7bbd49357d513c2a0d67ea144",
+    "revision": "655a236641a6bf1af37ebeef1312e57f",
     "url": "/hue-lights/index.html"
   },
   {
