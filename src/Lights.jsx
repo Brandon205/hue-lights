@@ -19,7 +19,6 @@ export default function Lights(props) {
       }).catch(err => {
         console.log(err);
       })
-      console.log("fetched")
     }
   }, [props.url, lightSwitch])
 
