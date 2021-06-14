@@ -11,7 +11,8 @@ export default function App() {
   const [url, setUrl] = useState('default');
   const [connected, setConnected] = useState(false);
   const [ip, setIp] = useState('');
-  const [redirect, setRedirect] = useState(false)
+  const [redirect, setRedirect] = useState(false);
+  const [lastInfo, setLastInfo] = useState("");
 
   useEffect(() => { // To see if the user already has info in LS
     if (localStorage.getItem('hue-info') === null) { //TODO: add a better check than just LS (contact hue api to check for errors?)
@@ -61,7 +62,23 @@ export default function App() {
   let disconnect = () => {
     setIp('')
     localStorage.removeItem('hue-info')
+    setUrl('default')
+    setConnected(false)
     setRedirect(true)
+  }
+
+  let reconnect = () => {
+    if (connected) {
+      let hueInfo = localStorage.getItem("hue-info")
+      hueInfo = hueInfo.split(",")
+      setIp(hueInfo[0])
+      let tempUrl = `https://${ip}/api/${hueInfo[1]}`
+      setUrl(tempUrl);
+      setConnected(true)
+      createToast("Attempted to Reconnect...", "orange")
+    } else if (lastInfo !== "") {
+
+    }
   }
 
   let login;
@@ -70,6 +87,8 @@ export default function App() {
       <div className="container bottom-gap">
         <h2>Your Hue bridge is <Link to='/login' className="green-text text-darken-3">connected</Link>.</h2>
         <button className="btn red" onClick={disconnect}>Disconnect</button>
+        <h4>Press reconnect here to reset the app and possibly fix connection issues</h4>
+        <button className="btn red" onClick={reconnect}>Reconnect</button>
       </div>
     )
   } else {
@@ -85,6 +104,7 @@ export default function App() {
         <div className="tooltip">How to find a Hue Bridge IP Address
           <span className="tooltiptext">If the IP field isn't autofilled: 1. Open the Hue App and go settings/Hue Bridges 2. Find the Bridge you want to connect to and hit the i icon 3. Copy the IP shown there, hit the pairing button on the Hue Bridge and click Connect.</span>
         </div>
+        {/* <button className="btn red" onClick={reconnect}>Reconnect</button> */}
         </div>
     )
   }
