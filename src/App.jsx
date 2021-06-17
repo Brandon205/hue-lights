@@ -12,7 +12,6 @@ export default function App() {
   const [connected, setConnected] = useState(false);
   const [ip, setIp] = useState('');
   const [redirect, setRedirect] = useState(false);
-  const [lastInfo, setLastInfo] = useState("");
 
   useEffect(() => { // To see if the user already has info in LS
     if (localStorage.getItem('hue-info') === null) { //TODO: add a better check than just LS (contact hue api to check for errors?)
@@ -25,19 +24,21 @@ export default function App() {
 
     // Set the IP Address by default
     Axios.get("https://discovery.meethue.com").then((res) => {
-      if (res.data[0] !== undefined) {
+      if (res.data[0] !== undefined && !connected) {
         setIp(res.data[0].internalipaddress)
         createToast('Autofilled your Hue\'s IP Address', 'green')
+      } else if (connected) {
+        createToast('Connected to your Hue Bridge', 'green')
       } else {
-        createToast('Not able to find IP Address of a Bridge on your WiFi', 'orange')
+        createToast('Not able to automatically find a Hue Bridge on your network', 'orange')
       }
     })
 
   }, [])
 
-  let updateUrl = (e) => { // Sets the URL for the REST API
+  let updateUrl = (e) => { // Sets the URL for the API
     e.preventDefault();
-    Axios.post(`https://${ip}/api`, {"devicetype": "YAHWA#user"}).then(res => {
+    Axios.post(`https://${ip}/api`, {"devicetype": "HueLite#user"}).then(res => {
       if (res.data[0].error) {
         if (res.data[0].error.type === 101) {
           createToast('Link button not pressed', 'red')
@@ -67,20 +68,6 @@ export default function App() {
     setRedirect(true)
   }
 
-  let reconnect = () => {
-    if (connected) {
-      let hueInfo = localStorage.getItem("hue-info")
-      hueInfo = hueInfo.split(",")
-      setIp(hueInfo[0])
-      let tempUrl = `https://${ip}/api/${hueInfo[1]}`
-      setUrl(tempUrl);
-      setConnected(true)
-      createToast("Attempted to Reconnect...", "orange")
-    } else if (lastInfo !== "") {
-
-    }
-  }
-
   let login;
   if (connected) {
     login = (
@@ -88,7 +75,6 @@ export default function App() {
         <h2>Your Hue bridge is <Link to='/login' className="green-text text-darken-3">connected</Link>.</h2>
         <button className="btn red" onClick={disconnect}>Disconnect</button>
         <h4>Press reconnect here to reset the app and possibly fix connection issues</h4>
-        <button className="btn red" onClick={reconnect}>Reconnect</button>
       </div>
     )
   } else {
@@ -100,11 +86,10 @@ export default function App() {
           <input className="validate" type="text" name="ip" id="ip" placeholder="Hue Bridge IP" value={ip} onChange={(e) => setIp(e.target.value)} required />
           <input type="submit" value="Connect" onClick={(e) => updateUrl(e)} />
         </form>
-        <p>Make sure to press the link button on the Hue Bridge within 1 minute before pressing connect</p>
-        <div className="tooltip">How to find a Hue Bridge IP Address
+        <p>Make sure to press the link button on the Hue Bridge within 1 minute of pressing Connect</p>
+        <div className="tooltip">How to find the IP of your Hue Bridge
           <span className="tooltiptext">If the IP field isn't autofilled: 1. Open the Hue App and go settings/Hue Bridges 2. Find the Bridge you want to connect to and hit the i icon 3. Copy the IP shown there, hit the pairing button on the Hue Bridge and click Connect.</span>
         </div>
-        {/* <button className="btn red" onClick={reconnect}>Reconnect</button> */}
         </div>
     )
   }
