@@ -74,7 +74,6 @@ export default function App() {
       <div className="container bottom-gap">
         <h2>Your Hue bridge is <Link to='/login' className="green-text text-darken-3">connected</Link>.</h2>
         <button className="btn red" onClick={disconnect}>Disconnect</button>
-        <h4>Press reconnect here to reset the app and possibly fix connection issues</h4>
       </div>
     )
   } else {
