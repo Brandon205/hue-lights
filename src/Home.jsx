@@ -19,7 +19,7 @@ export default function Home() {
             <p className="description no-show">
                 Hue Lite is a simple and easy to use website that has little to no setup in order to control your Hue lights.
                 From what I can tell there isn't really a site like this that allows for control of your lights from the web without
-                having to download an app first, so here it is, though it is very basic so far...
+                having to download an app first, so here it is, though it is pretty basic so far...
             </p>
             <h4 className="question" onClick={() => show(1)}>How does it work?</h4>
             <p className="description no-show">
